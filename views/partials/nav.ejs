@@ -1,0 +1,74 @@
+<!-- nav.ejs : 사이트 상단 메뉴 -->
+
+<header class="header-wrap">
+    <!-- util area -->
+    <div class="top-header">
+        <div class="top-header__wrap clearfix">
+            <div class="left-area">
+                <a href="#" class="top-header__home">HOME</a>
+                <p class="top-header__wellcome">로그인 후 아래 '브랜드' 메뉴에서 좋아하는 브랜드를 ♥해주세요</p>
+            </div>
+            <div class="right-area">
+                <ul class="top-header__top-menu top-menu clearfix">
+                    <li class="top-menu__item login"><a href="#">로그인</a></li>
+                    <li class="top-menu__item mypage dropmenu">
+                        <a href="#"><span>마이페이지</span><i class="fas fa-caret-down"></i></a>
+                        <ul class="mypage dropmenu__list">
+                            <li class="dropmenu__item">주문조회</li>
+                            <li class="dropmenu__item">나의회원등급</li>
+                            <li class="dropmenu__item">쿠폰조회</li>
+                            <li class="dropmenu__item">마일리지조회</li>
+                            <li class="dropmenu__item">e-Gift Card</li>
+                            <li class="dropmenu__item">회원정보변경</li>
+                            <li class="dropmenu__item">온라인상담</li>
+                        </ul>
+                    </li>
+                    <li class="top-menu__item language dropmenu">
+                        <a href="#"><span>LANGUAGE</span><i class="fas fa-caret-down"></i></a>
+                        <ul class="language dropmenu__list">
+                            <li class="dropmenu__item">한국어</li>
+                            <li class="dropmenu__item">ENGLISH</li>
+                            <li class="dropmenu__item">中文</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- gnb area -->
+    <div class="gnb">
+        <div class="gnb__wrap clearfix">
+            <div class="logo">
+                <h1><a href="#">SHOES</a></h1>
+            </div>
+
+            <ul class="gnb-menu clearfix">
+                <li class="gnb-menu__item"><a href="#">브랜드 소개</a></li>
+                <li class="gnb-menu__item"><a href="#">매장</a></li>
+                <li class="gnb-menu__item"><a href="#">룩북</a></li>
+                <li class="gnb-menu__item"><a href="#">캠페인</a></li>
+                <li class="gnb-menu__item"><a href="#">커뮤니티</a></li>
+            </ul>
+
+            <div class="gnb-util util clearfix">
+                <ul class="util__list">
+                    <!-- 추후 text-hidden 적용 -->
+                    <li class="util__item">
+                        <!-- Search -->
+                        <a href="#"><i class="fas fa-search"></i></a>
+                    </li>
+                    <li class="util__item">
+                        <!-- Wish list -->
+                        <a href="#"><i class="far fa-heart"></i><span class="item-count">(0)</span></a>
+                    </li>
+                    <li class="util__item">
+                        <!-- Shopping basket -->
+                        <a href="#"><i class="fas fa-cube"></i><span class="item-count">(0)</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- gnb area end -->
+</header>

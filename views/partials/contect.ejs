@@ -1,0 +1,105 @@
+<!-- content.ejs : 메인 페이지 -->
+
+<!-- 이미지 슬라이더 -->
+<div class="slide_wrap">
+    <div class="slide_box">
+        <div class="slide_list clearfix">
+            <div class="slide_content slide01">
+                <img src="img/silde-1.jpg" alt="" />
+            </div>
+            <div class="slide_content slide02">
+                <img src="img/silde-2.jpg" alt="" />
+            </div>
+            <div class="slide_content slide03">
+                <img src="img/silde-3.jpg" alt="" />
+            </div>
+            <div class="slide_content slide04">
+                <img src="img/silde-4.jpg" alt="" />
+            </div>
+            <div class="slide_content slide05">
+                <img src="img/silde-5.jpg" alt="" />
+            </div>
+        </div>
+        <ul class="slide_pagination"></ul>
+    </div>
+
+    <div class="slide_btn_box">
+        <button type="button" class="slide_btn_prev"><i class="fas fa-chevron-left"></i></button>
+        <button type="button" class="slide_btn_next"><i class="fas fa-chevron-right"></i></button>
+    </div>
+</div>
+
+<!-- 제품 소개 및 브랜드 소개, 이벤트 배너 -->
+<section id="main-container">
+    <!-- 제품 소개 슬라이더 -->
+    <div class="product-list">
+        <ul class="category">
+            <li class="category__item-new"><a href="#">NEW</a></li>
+            <li class="category__item-best"><a href="#">BEST</a></li>
+        </ul>
+
+        <!-- 슬라이드 -->
+        <div class="product-list__warp">
+            <!-- 슬라이드 컨트롤러 -->
+            <div class="product-list__arrow">
+                <button type="button" class="product__prev"><i class="fas fa-chevron-left"></i></button>
+                <button type="button" class="product__next"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div class="product-slide new">
+                <ul class="new__list clearfix">
+                    <li class="new__list-item">
+                        <a href="#"><img src="img/s/img1.png" alt="신발 1번" /></a>
+                    </li>
+                    <li class="new__list-item">
+                        <a href="#"><img src="img/s/img2.png" alt="신발 2번" /></a>
+                    </li>
+                    <li class="new__list-item">
+                        <a href="#"><img src="img/s/img3.png" alt="신발 3번" /></a>
+                    </li>
+                    <!--
+                    <li class="new__list-item"><a href="#"></a></li>
+                    <li class="new__list-item"><a href="#"></a></li>
+                    <li class="new__list-item"><a href="#"></a></li>
+                    <li class="new__list-item"><a href="#"></a></li>
+                    <li class="new__list-item"><a href="#"></a></li>
+                    <li class="new__list-item"><a href="#"></a></li>
+                    -->
+                </ul>
+            </div>
+            <!-- <div class="product-slide best">
+                <ul class="best__list">
+                    <li class="best__list-item"><a href="#"></a></li>
+                    <li class="best__list-item"><a href="#"></a></li>
+                    <li class="best__list-item"><a href="#"></a></li>
+                    <li class="best__list-item"><a href="#"></a></li>
+                    <li class="best__list-item"><a href="#"></a></li>
+                    <li class="best__list-item"><a href="#"></a></li>
+                    <li class="best__list-item"><a href="#"></a></li>
+                    <li class="best__list-item"><a href="#"></a></li>
+                    <li class="best__list-item"><a href="#"></a></li>
+                </ul>
+            </div> -->
+        </div>
+    </div>
+
+    <!-- 브랜드 영상 -->
+    <div class="brand-video">
+        <!-- <video src="video/shoes.mp4" class="main-video" width="1024px" muted></video> -->
+        <img src="img/video.jpg" alt="가라데이터" class="season-banner__img" />
+    </div>
+
+    <!-- 시즌 배너 -->
+    <div class="season-banner">
+        <a href="#">
+            <!--
+                <div class="season-banner__text">
+                    <p class="title">TITLE</p>
+                    <p class="sub-title">CONTENT</p>
+                </div>
+            -->
+            <img src="img/banner.jpg" alt="시즌 배너" class="season-banner__img" />
+        </a>
+    </div>
+</section>
+
+<script src="js/slide.js"></script>

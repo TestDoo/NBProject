@@ -1,0 +1,551 @@
+/* body */
+body {
+    font-family: "Malgun Gothic", "맑은 고딕", "Dotum", "돋움", AppleGothic, sans-serif;
+    color: #262626;
+}
+/* clearfix 클래스를 가지면 적용됨 */
+.clearfix::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+/* === 상단 메뉴 전체 === */
+.header-wrap {
+    /* position: fixed; */
+    width: 100%;
+}
+
+/* 상단 메뉴 > top */
+.header-wrap .top-header {
+    height: 40px;
+    border-bottom: 1px solid #e5e5e5;
+}
+.header-wrap .top-header__wrap {
+    width: 1205px;
+    height: inherit;
+    margin: 0 auto;
+}
+
+/* 상단 메뉴 > top > left area */
+.top-header .left-area {
+    float: left;
+    height: inherit;
+    line-height: 40px;
+    font-size: 0; /* a태그 공백 제거 */
+}
+.top-header .left-area a {
+    display: inline-block;
+    font-size: 10px;
+    letter-spacing: 1px;
+    margin-right: 40px;
+}
+.top-header .left-area p {
+    display: inline-block;
+    font-size: 12px;
+}
+
+/* 상단 메뉴 > top > right area */
+.top-header .right-area {
+    float: right;
+    height: inherit;
+}
+.top-header .right-area .top-menu {
+    height: inherit;
+}
+.top-header .right-area .top-menu .top-menu__item {
+    display: inline-block;
+    position: relative;
+    height: inherit;
+    line-height: 40px;
+    font-size: 12px;
+    letter-spacing: -0.05em;
+    padding: 0 8px;
+    cursor: pointer;
+}
+.top-header .right-area .top-menu .top-menu__item:first-child {
+    margin-left: 0px;
+}
+
+/* 상단 메뉴 > top > 드롭 메뉴 CSS */
+.top-header .right-area .top-menu .top-menu__item.dropmenu i {
+    margin-left: 10px;
+}
+.top-header .right-area .top-menu .top-menu__item.dropmenu:hover {
+    background-color: #e2e2e2;
+}
+.top-header .right-area .top-menu .top-menu__item.dropmenu:hover span {
+    color: #727272;
+}
+.top-header .right-area .top-menu .dropmenu__list {
+    display: none;
+    position: absolute;
+    padding: 17px 0;
+    border: 1px solid #e3e3e3;
+    /* 미완성 : 더 만들어야 함 */
+}
+.top-header .right-area .top-menu .dropmenu__list .dropmenu__item {
+    margin: 0 0 11px 0;
+    padding: 0;
+    line-height: 1;
+}
+.top-header .right-area .top-menu .dropmenu__list .dropmenu__item:last-child {
+    margin-bottom: 0px;
+}
+
+/* 상단 메뉴 > gnb */
+.gnb {
+    height: 80px;
+    border-bottom: 1px solid #e5e5e5;
+}
+.gnb .gnb__wrap {
+    position: relative;
+    width: 1205px;
+    height: inherit;
+    font-size: 14px;
+    margin: 0 auto;
+}
+
+/* gnb메뉴 position, float, clearfix */
+.gnb .logo,
+.gnb .gnb-menu {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    float: left;
+}
+.gnb .logo {
+    transform: translateY(-60%);
+}
+.gnb-menu {
+    left: 174px;
+}
+.gnb .gnb-util {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.gnb-menu .gnb-menu__item {
+    float: left;
+}
+.gnb .gnb-util .util__item {
+    float: left;
+}
+/*  */
+
+.logo h1 {
+    display: inline-block;
+    font-size: 35px;
+    letter-spacing: -0.1em;
+}
+.gnb-menu .gnb-menu__item {
+    font-weight: bold;
+    margin-right: 35px;
+}
+.gnb-menu .gnb-menu__item:last-child {
+    margin-right: 0;
+}
+
+.gnb-util .util__item {
+    margin-left: 13px;
+}
+.gnb-util .util__item:first-child {
+    margin-left: 0;
+}
+.gnb-util .util__item:nth-child(2) {
+    margin-left: 20px;
+}
+.gnb-util .util__item .item-count {
+    font-size: 10px;
+    margin-left: 4px;
+}
+
+/*  */
+/* === Slide === */
+.slide_wrap {
+    position: relative;
+    width: 100%;
+    margin: auto;
+    margin-bottom: 150px;
+}
+.slide_box {
+    max-width: 1920px;
+    height: 600px;
+    margin: auto;
+    overflow: hidden;
+}
+.slide_list {
+    width: 9600px;
+}
+.slide_content {
+    display: table;
+    float: left;
+    width: auto;
+    height: 600px;
+}
+.slide_content img {
+    width: 1920px;
+    height: 600px;
+}
+
+.slide_btn_box button {
+    position: absolute;
+    display: inline-block;
+    width: 75px;
+    height: 75px;
+    color: #fff;
+    background-color: rgba(26, 26, 26, 0.5);
+    cursor: pointer;
+}
+.slide_btn_box .slide_btn_prev {
+    top: 50%;
+    transform: translateY(-50%);
+    /* left: -150px; */
+    left: 30px;
+}
+.slide_btn_box .slide_btn_next {
+    top: 50%;
+    transform: translateY(-50%);
+    /* right: -150px; */
+    right: 30px;
+}
+.slide_pagination {
+    position: absolute;
+    bottom: 40px;
+    left: 0;
+    width: 100%;
+    font-size: 0;
+    text-align: center;
+}
+.slide_pagination li {
+    display: inline-block;
+    font-size: 15px;
+    margin: 0 5px;
+}
+.slide_pagination li a {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    border: 2px solid #262626;
+    border-radius: 20px;
+    overflow: hidden;
+    text-indent: -999px;
+}
+.slide_pagination li a.on {
+    background-color: #262626;
+}
+/*  */
+
+/* === main === */
+#main-container {
+    width: 1205px;
+    margin: 0 auto;
+}
+
+/* main > product */
+.product-list {
+    position: relative;
+    margin-bottom: 80px;
+}
+.product-list .category {
+    font-size: 0;
+    text-align: center;
+    margin-bottom: 23px;
+}
+.product-list .category li {
+    display: inline-block;
+}
+.product-list .category li a {
+    display: block;
+    margin: 0 33px;
+    font-size: 21px;
+}
+
+.product-list .category li a:hover,
+.product-list .category li a:focus-within {
+    border-bottom: 2px solid #363636;
+}
+
+/* main > product slide part */
+.product-list__warp {
+    position: relative;
+    width: 100%;
+}
+.product-slide {
+    width: 100%;
+    max-width: 922px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.product-slide .new__list li {
+    /* 이미지가 들어갈 사이즈 지정 */
+    width: 294px;
+    height: 444px;
+}
+
+/* .product-slide .new__list li:first-child {
+    각 li에 이미지 넣기
+    background: url("../img/s/pdt1-990.jpg") no-repeat center center;
+    background-size: 100%;
+} */
+
+.new__list {
+    width: 100%;
+    font-size: 0;
+    margin: 0 auto;
+}
+.new__list .new__list-item {
+    float: left;
+    margin-right: 20px;
+}
+.new__list .new__list-item:last-child {
+    margin-right: 0;
+}
+
+/* main > product > slide control */
+.product-list__arrow .product__prev,
+.product-list__arrow .product__next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    color: #464646;
+    font-size: 22px;
+    background-color: #fff;
+    cursor: pointer;
+}
+.product-list__arrow .product__prev {
+    left: 40px;
+}
+.product-list__arrow .product__next {
+    right: 40px;
+}
+
+/* main > video */
+.brand-video {
+    width: 100%;
+    text-align: center;
+    font-size: 0;
+    margin-bottom: 80px;
+}
+.brand-video img {
+    width: 922px;
+}
+
+/* main > banner */
+.season-banner {
+    width: 100%;
+    text-align: center;
+    font-size: 0;
+    margin-bottom: 103px;
+}
+.season-banner a img {
+    width: 1100px;
+}
+
+/* === footer === */
+.footer {
+    width: 100%;
+    border-top: 1px solid #e3e3e3;
+}
+/* footer > footer--top */
+.footer--top {
+    width: 1205px;
+    margin: 0 auto;
+    padding: 30px 0 50px 0;
+}
+.footer__logo-warp {
+    float: left;
+    margin-right: 70px;
+}
+.footer__logo-warp h2 {
+    font-size: 35px;
+    letter-spacing: -0.1em;
+}
+
+.footer__menu-list {
+    float: left;
+    font-size: 0;
+    margin: 0 40px;
+    padding-top: 10px;
+}
+.footer__menu-list:first-child {
+    margin-left: 0;
+}
+.footer__menu-list:nth-child(4) {
+    margin-right: 150px;
+}
+.footer__menu-list:last-child {
+    margin: 0;
+}
+.footer__menu-list li {
+    margin-bottom: 15px;
+}
+.footer__menu-list li:last-child {
+    margin-bottom: 0;
+}
+.footer__menu-list li a {
+    font-size: 12px;
+}
+/* social */
+.footer__menu-list.social li a {
+    font-size: 14px;
+}
+.footer__menu-list.social li i {
+    margin-right: 10px;
+}
+
+/* footer > footer--bottom */
+.footer--bottom {
+    background-color: #f5f5f5;
+    padding: 35px 0;
+}
+.footer--bottom .bottom--warp {
+    width: 1205px;
+    margin: 0 auto;
+}
+.footer--bottom__left {
+    float: left;
+}
+.footer--bottom__right {
+    float: right;
+}
+
+/* footer > footer--bottom > service */
+.service--warp {
+    font-size: 0;
+    margin-bottom: 25px;
+}
+.service--warp a {
+    font-size: 10px;
+    margin-right: 30px;
+}
+.service--warp .callsell {
+    margin-right: 11px;
+}
+.service--warp .infomation {
+    font-weight: bold;
+}
+.service--warp .service--back {
+    background-color: #fff;
+    border: 1px solid #e3e3e3;
+    padding: 5px 7px;
+}
+
+/* footer > footer--bottom > license */
+.license--warp {
+    margin-bottom: 20px;
+}
+.license--warp p {
+    font-size: 10px;
+}
+.license--warp span {
+    display: inline-block;
+    width: 1px;
+    height: 9px;
+    margin: 0 10px;
+    background-color: #cccccc;
+}
+.license--warp .license_top {
+    margin-bottom: 10px;
+}
+
+/* footer > footer--bottom > copyright */
+.copyright {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+}
+
+/* footer > footer--bottom__right */
+.language--bottom,
+.family-site {
+    float: left;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+}
+.language--bottom {
+    margin-right: 30px;
+}
+
+.language--bottom i,
+.family-site i {
+    font-size: 12px;
+    margin-left: 10px;
+}
+
+/* footer > footer--bottom__right > family-site__list */
+.language__list,
+.family-site__list {
+    display: none;
+}
+
+/* =========== page title CSS =========== */
+.page-title {
+    height: 83px;
+    border-bottom: 1px solid #e3e3e3;
+    text-align: center;
+    font-weight: normal;
+    padding-top: 30px;
+}
+
+/* =========== board.html CSS =========== */
+/* *** 게시판 상단 기본 설정 *** */
+.borad-warp {
+    max-width: 1000px;
+    margin: 40px auto 150px;
+}
+#board {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+#board tr th {
+    border-top: 1px solid #bbbbbb;
+    border-bottom: 1px solid #bbbbbb;
+    text-align: center;
+    padding: 10px 9px;
+}
+#board .post__title {
+    width: 60%;
+}
+#board .post__tab {
+    width: 80px;
+}
+#board .post__write {
+    width: 135px;
+}
+
+/* *** 게시글 기본 설정 *** */
+.post td {
+    border-bottom: 1px solid #eeeeee;
+    padding: 10px 9px;
+}
+.post .title {
+    text-align: left;
+}
+.post .tab,
+.post .write,
+.post .time,
+.post .view,
+.post .like {
+    text-align: center;
+}
+.post .tab {
+    color: #4f80db;
+}
+.post .reply-count {
+    font-weight: bold;
+    margin-left: 10px;
+}
+.post .write {
+    max-width: 135px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.post .like {
+    color: #3868c2;
+    font-weight: bold;
+}

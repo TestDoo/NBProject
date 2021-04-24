@@ -1,0 +1,39 @@
+* {
+    margin: 0;
+    padding: 0;
+    /* outline: 0; */
+    border: 0;
+    box-sizing: border-box;
+}
+body {
+    line-height: 1;
+}
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+    display: block;
+}
+
+ul,
+ol,
+dl {
+    list-style: none;
+}
+
+img,
+video {
+    border: 0;
+}
+
+a {
+    text-decoration: none;
+    color: #111111;
+}
