@@ -1,0 +1,52 @@
+<!-- show.ejs - 글 상세 페이지 -->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <%- include('../partials/head') %>
+    </head>
+    <body>
+        <%- include('../partials/nav') %>
+
+        <div class="div__center">
+            <!-- 글 상세 보기 -->
+            <div>
+                <h5>글제목 : <%= post.title %></h5>
+                <div>
+                    <div>
+                        <div>글내용 : <%= post.body%></div>
+                    </div>
+                    <div>
+                        <div>
+                            <div><span>작성날짜</span> : <span data-date-time="<%= post.createdAt %>"></span></div>
+                            <!-- 만약 수정이 되면 -->
+                            <% if(post.updatedAt) { %>
+                            <div><span>수정날짜</span> : <span data-date-time="<%= post.updatedAt %>"></span></div>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 뒤로가기, 수정, 삭제 버튼 -->
+            <div>
+                <a href="/posts">Back</a>
+
+                <a href="/posts/<%= post._id %>/edit">Edit</a>
+
+                <form action="/posts/<%= post._id %>?_method=delete" method="post">
+                    <!-- 
+                        javascript:void(0) -> 클릭시 a링크 동작 못하게 하고 onclick 이벤트 발생 
+                        onclick 이벤트 -> 정말 삭제? yes or no에 따라 동작
+                        no는 no / yes시 form에 submit됨 -> submit 버튼 같은 동작을 한다
+                        
+                    -->
+                    <a href="javascript:void(0)" onclick="confirm('정말 삭제하시겠습니까??')?this.parentElement.submit():null;">Delete</a>
+                </form>
+            </div>
+        </div>
+
+        <!-- footer -->
+        <%- include('../partials/footer') %>
+    </body>
+</html>

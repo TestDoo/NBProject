@@ -1,0 +1,53 @@
+<!-- index.ejs - 게시판 페이지 -->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <%- include('../partials/head') %>
+    </head>
+    <body>
+        <!-- site header -->
+        <%- include('../partials/nav') %>
+
+        <!-- 내가 만든 board 영역 -->
+        <div class="borad-warp">
+            <table id="board">
+                <thead>
+                    <tr>
+                        <th class="post__tab" scope="col">분류</th>
+                        <th class="post__title" scope="col">제목</th>
+                        <th class="post__write" scope="col">글쓴이</th>
+                        <th class="post__date" scope="col">날짜</th>
+                        <th class="post__view" scope="col">조회</th>
+                        <th class="post__like" scope="col">추천</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if(posts == null || posts.length == 0) { %>
+                    <tr>
+                        <td colspan="2" class="post__less-message">아직 게시판에 글이 작성되지 않았습니다 :D</td>
+                    </tr>
+                    <% } %>
+                    <!-- 게시판에 데이터가 있다면 -->
+                    <% posts.forEach(function(post) { %>
+                    <tr class="post">
+                        <td class="tab" scope="col">자유</td>
+                        <td class="title"><a href="/posts/<%= post._id %>" class="title-detail"><%= post.title %></a></td>
+                        <td class="write"><span>홍길동</span></td>
+                        <td class="time date"><span data-date="<%= post.createdAt %>"></span></td>
+                        <td class="view">1555</td>
+                        <td class="like">5</td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+
+            <div class="btn__warp">
+                <a class="btn__write" href="/posts/new">글쓰기</a>
+            </div>
+        </div>
+
+        <!-- footer -->
+        <%- include('../partials/footer') %>
+    </body>
+</html>

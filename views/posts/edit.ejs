@@ -1,0 +1,34 @@
+<!-- edit.ejs - 글 수정 페이지 -->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <%- include('../partials/head') %>
+    </head>
+    <body>
+        <%- include('../partials/nav') %>
+
+        <!-- 글 수정 영역 -->
+        <div class="div__center">
+            <form action="/posts/<%= post._id %>?_method=put" method="post">
+                <div class="form__group">
+                    <label for="title">제목</label>
+                    <input type="text" id="title" name="title" value="<%= post.title %>" class="form__control" />
+                </div>
+
+                <div class="form__group">
+                    <label for="body">내용</label>
+                    <textarea id="body" name="body" rows="5" class="form__control"><%= post.body %></textarea>
+                </div>
+
+                <div>
+                    <a class="btn__back" href="/posts"><span>Back</span> </a>
+                    <button type="submit" class="btn__submit"><span>Submit</span></button>
+                </div>
+            </form>
+        </div>
+
+        <!-- footer -->
+        <%- include('../partials/footer') %>
+    </body>
+</html>
