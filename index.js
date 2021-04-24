@@ -30,7 +30,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 
 // Routes
+// app.use -> 서버에 요청이 올 때마다 무조건 콜백함수 실행
 app.use("/", require("./routes/home"));
+app.use("/posts", require("./routes/posts"));
 
 // Port Setting
 var port = 3000;
