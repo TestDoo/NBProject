@@ -2,6 +2,9 @@
 
 var mongoose = require("mongoose");
 
+// 회원 비밀번호 암호화를 위한 패키지 - DB에 비밀번호를 그대로 저장하지 않고 hash 변환하여 저장한다.
+var bcrypt = require("bcryptjs");
+
 var userSchema = mongoose.Schema(
     {
         username: { type: String, required: [true, "Username is required!"], unique: true },
@@ -72,8 +75,10 @@ userSchema.path("password").validate(function (v) {
     if (!user.isNew) {
         if (!user.currentPassword) {
             user.invalidate("currentPassword", "현재 비밀번호가 필요합니다!");
-        } else if (user.currentPassword != user.originalPassword) {
-            user.invalidate("currentPassword", "현재 비밀번호가 잘못됐습니다!");
+        } else if (!bcrypt.compareSync(user.currentPassword, user.originalPassword)) {
+            // bcrypt패키지의 compareSync함수를 통해 저장된 hash와 입력받은 비밀번호의 hash가 일치하는지 확인
+            // currentPassword: 입력받은 비밀번호의 해시값, originalPassword: DB에 저장된 비밀번호의 해시값
+            user.invalidate("currentPassword", "현재 비밀번호가 맞지않습니다.");
         }
 
         if (user.newPassword !== user.passwordConfirmation) {
@@ -81,6 +86,26 @@ userSchema.path("password").validate(function (v) {
         }
     }
 });
+
+// 비밀번호 해쉬화
+// model.create, model,save 함수 실행시 발생하는 save이벤트 실행 전에 실행되는 함수
+userSchema.pre("save", function (next) {
+    var user = this;
+    if (!user.isModified("password")) {
+        // 회원가입으로 인한 비밀번호 생성, 회원수정으로 인한 비밀번호 변경이 없는 경우 실행되는 문장
+        return next();
+    } else {
+        // 회원가입 및 회원수정 시 실행되는 else문 유저의 해쉬값을 새로 입력받은 값으로 바꾼다.
+        user.password = bcrypt.hashSync(user.password); //3-2
+        return next();
+    }
+});
+
+// 유저의 비밀번호 해쉬값과 입력받은 비밀번호 text를 비교하는 메소드 -> 로그인 시 사용
+userSchema.methods.authenticate = function (password) {
+    var user = this;
+    return bcrypt.compareSync(password, user.password);
+};
 
 // model & export
 var User = mongoose.model("user", userSchema);
