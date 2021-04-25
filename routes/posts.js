@@ -52,4 +52,12 @@ router.put("/:id", function (req, res) {
     });
 });
 
+// 글 삭제하기 - destroy
+router.delete("/:id", function (req, res) {
+    Post.deleteOne({ _id: req.params.id }, function (err) {
+        if (err) return res.json(err);
+        res.redirect("/posts");
+    });
+});
+
 module.exports = router;
