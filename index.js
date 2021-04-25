@@ -2,6 +2,8 @@ var express = require("express");
 var mongoose = require("mongoose");
 var bodyParser = require("body-parser");
 var methodOverride = require("method-override");
+var flash = require("connect-flash");
+var session = require("express-session");
 var app = express();
 
 // 몽고 디비 기본셋팅
@@ -28,6 +30,11 @@ app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
+
+// flash는 변수처럼 이름과 값을 저장할 수 있는데, 한번 생성되고 서버 메모리에 저장돼 있다가 한번 사용하면 사라지는 형태
+app.use(flash());
+// secret은 session을 해쉬화 하는데 사용하는 값
+app.use(session({ secret: "MySecret", resave: true, saveUninitialized: true }));
 
 // Routes
 // app.use -> 서버에 요청이 올 때마다 무조건 콜백함수 실행

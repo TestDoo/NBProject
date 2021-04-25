@@ -12,7 +12,7 @@
             <h3>회원목록(임시로 만든 것)</h3>
             <ul>
                 <% if(users == null || users.length == 0){ %>
-                <li>There is no user yet.</li>
+                <li>가입한 회원이 아무도 없습니다 :(</li>
                 <% } %> <% users.forEach(function(user) { %>
                 <li>
                     <a href="/users/<%= user.username %>"><%= user.username %></a>
