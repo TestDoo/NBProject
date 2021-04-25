@@ -1,0 +1,27 @@
+<!-- index.ejs - 회원가입 축하 페이지 -->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <%- include('../partials/head') %>
+    </head>
+    <body>
+        <!-- site header -->
+        <%- include('../partials/nav') %>
+        <div class="div__center">
+            <h3>회원목록(임시로 만든 것)</h3>
+            <ul>
+                <% if(users == null || users.length == 0){ %>
+                <li>There is no user yet.</li>
+                <% } %> <% users.forEach(function(user) { %>
+                <li>
+                    <a href="/users/<%= user.username %>"><%= user.username %></a>
+                </li>
+                <% }) %>
+            </ul>
+        </div>
+
+        <!-- footer -->
+        <%- include('../partials/footer') %>
+    </body>
+</html>
