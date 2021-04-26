@@ -10,10 +10,18 @@
             </div>
             <div class="right-area">
                 <ul class="top-header__top-menu top-menu clearfix">
-                    <li class="top-menu__item"><a href="/users">회원목록(임시) </a></li>
-                    <li class="top-menu__item login"><a href="/users/new">회원가입</a></li>
+                    <li class="top-menu__item"><a href="/users">회원목록(작업용) </a></li>
+
+                    <% if(isAuthenticated){ %>
+                    <li class="top-menu__item"><a href="/users/<%= currentUser.username %>">내 계정</a></li>
+                    <li class="top-menu__item"><a href="/logout">로그아웃</a></li>
+                    <% } else { %>
+                    <li class="top-menu__item"><a href="/users/new">회원가입</a></li>
+                    <li class="top-menu__item"><a href="/login">로그인</a></li>
+                    <% } %>
+
                     <li class="top-menu__item mypage dropmenu">
-                        <a href="#"><span>마이페이지</span><i class="fas fa-caret-down"></i></a>
+                        <a href="/login"><span>마이페이지</span><i class="fas fa-caret-down"></i></a>
                         <ul class="mypage dropmenu__list">
                             <li class="dropmenu__item">주문조회</li>
                             <li class="dropmenu__item">나의회원등급</li>

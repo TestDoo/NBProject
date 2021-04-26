@@ -4,6 +4,7 @@ var bodyParser = require("body-parser");
 var methodOverride = require("method-override");
 var flash = require("connect-flash");
 var session = require("express-session");
+var passport = require("./config/passport");
 var app = express();
 
 // 몽고 디비 기본셋팅
@@ -35,6 +36,17 @@ app.use(methodOverride("_method"));
 app.use(flash());
 // secret은 session을 해쉬화 하는데 사용하는 값
 app.use(session({ secret: "MySecret", resave: true, saveUninitialized: true }));
+
+// Passport 로그인 관련 패키지
+app.use(passport.initialize());
+// passport와 session 연결시킴
+app.use(passport.session());
+app.use(function (req, res, next) {
+    // req.isAuthenticated(); 현재 로그인 했는지 안했는지를 true, false로 return하는 함수
+    res.locals.isAuthenticated = req.isAuthenticated();
+    res.locals.currentUser = req.user;
+    next();
+});
 
 // Routes
 // app.use -> 서버에 요청이 올 때마다 무조건 콜백함수 실행
