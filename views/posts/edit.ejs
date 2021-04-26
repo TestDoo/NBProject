@@ -13,13 +13,23 @@
             <form action="/posts/<%= post._id %>?_method=put" method="post">
                 <div class="form__group">
                     <label for="title">제목</label>
-                    <input type="text" id="title" name="title" value="<%= post.title %>" class="form__control" />
+                    <input type="text" id="title" name="title" value="<%= post.title %>" class="form__control <%= (errors.title)?'is-invalid':'' %>" />
+                    <% if(errors.title){ %>
+                    <span class="invalid-feedback"><%= errors.title.message %></span>
+                    <% } %>
                 </div>
 
                 <div class="form__group">
                     <label for="body">내용</label>
-                    <textarea id="body" name="body" rows="5" class="form__control"><%= post.body %></textarea>
+                    <textarea id="body" name="body" rows="5" class="form__control <%= (errors.body)?'is-invalid':'' %>"><%= post.body %></textarea>
+                    <% if(errors.body){ %>
+                    <span class="invalid-feedback"><%= errors.body.message %></span>
+                    <% } %>
                 </div>
+
+                <% if(errors.unhandled){ %>
+                <div class="invalid-feedback b-block"><%= errors.unhandled %></div>
+                <% } %>
 
                 <div>
                     <a class="btn__back" href="/posts/<%= post._id %>"><span>Back</span> </a>

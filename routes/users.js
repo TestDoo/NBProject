@@ -3,6 +3,7 @@
 var express = require("express");
 var router = express.Router();
 var User = require("../models/User");
+var util = require("../util");
 
 // index
 router.get("/", function (req, res) {
@@ -26,7 +27,7 @@ router.post("/", function (req, res) {
     User.create(req.body, function (err, user) {
         if (err) {
             req.flash("user", req.body);
-            req.flash("errors", parseError(err));
+            req.flash("errors", util.parseError(err));
             return res.redirect("/users/new");
         }
         res.redirect("/users");
@@ -78,7 +79,7 @@ router.put("/:username", function (req, res, next) {
             user.save(function (err, user) {
                 if (err) {
                     req.flash("user", req.body);
-                    req.flash("errors", parseError(err));
+                    req.flash("errors", util.parseError(err));
                     return res.redirect("/users/" + req.params.username + "/edit");
                 }
                 res.redirect("/users/" + user.username);
@@ -95,20 +96,3 @@ router.delete("/:username", function (req, res) {
 });
 
 module.exports = router;
-
-// mongoose에서 내는 에러와 mongoBD에서 내는 에러의 형태를 통일시켜주는 함수
-// {항목이름 : {message: "에러메시지"}} 형태로 출력됨
-function parseError(errors) {
-    var parsed = {};
-    if (errors.name == "ValidationError") {
-        for (var name in errors.errors) {
-            var validationError = errors.errors[name];
-            parsed[name] = { message: validationError.message };
-        }
-    } else if (errors.code == "11000" && errors.errmsg.indexOf("username") > 0) {
-        parsed.username = { message: "This username already exists!" };
-    } else {
-        parsed.unhandled = JSON.stringify(errors);
-    }
-    return parsed;
-}
