@@ -18,6 +18,7 @@
                     </div>
                     <div>
                         <div>
+                            <div class=""><span>글쓴이</span> : <%= post.write ? post.write.username : "" %></div>
                             <div><span>작성날짜</span> : <span data-date-time="<%= post.createdAt %>"></span></div>
                             <!-- 만약 수정이 되면 -->
                             <% if(post.updatedAt) { %>

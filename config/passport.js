@@ -15,12 +15,14 @@ passport.deserializeUser(function (id, done) {
     });
 });
 
+// local strategy
+// local-login은 뒤의 LocalStrategy에 이름을 부여한 것. home.js에서 local-login인이 호출되면 이 함수가 실행된다.
 passport.use(
     "local-login",
     new LocalStrategy(
         {
-            usernameField: "username", // 3-1
-            passwordField: "password", // 3-1
+            usernameField: "username",
+            passwordField: "password",
             passReqToCallback: true,
         },
         // 로그인 시 이 함수가 호출됨

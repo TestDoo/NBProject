@@ -16,7 +16,7 @@
                     <tr>
                         <th class="post__tab" scope="col">분류</th>
                         <th class="post__title" scope="col">제목</th>
-                        <th class="post__write" scope="col">글쓴이</th>
+                        <th class="post__write write" scope="col">글쓴이</th>
                         <th class="post__date" scope="col">날짜</th>
                         <th class="post__view" scope="col">조회</th>
                         <th class="post__like" scope="col">추천</th>
@@ -33,7 +33,7 @@
                     <tr class="post">
                         <td class="tab" scope="col">자유</td>
                         <td class="title"><a href="/posts/<%= post._id %>" class="title-detail"><%= post.title %></a></td>
-                        <td class="write"><span>홍길동</span></td>
+                        <td class="write"><span><%= post.write ? post.write.username : "" %></span></td>
                         <td class="time date"><span data-date="<%= post.createdAt %>"></span></td>
                         <td class="view">1555</td>
                         <td class="like">5</td>
