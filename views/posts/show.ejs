@@ -33,8 +33,9 @@
             <div>
                 <a href="/posts">Back</a>
 
+                <!-- 조건 : 로그인된 상태 + 게시물의 작성자 id와 현재 로그인된 사용자 id 일치 => 수정과 삭제버튼 활성화 -->
+                <% if(isAuthenticated && post.write && currentUser.id == post.write.id){ %>
                 <a href="/posts/<%= post._id %>/edit">Edit</a>
-
                 <form action="/posts/<%= post._id %>?_method=delete" method="post">
                     <!-- 
                         javascript:void(0) -> 클릭시 a링크 동작 못하게 하고 onclick 이벤트 발생 
@@ -44,6 +45,7 @@
                     -->
                     <a href="javascript:void(0)" onclick="confirm('정말 삭제하시겠습니까??')?this.parentElement.submit():null;">Delete</a>
                 </form>
+                <% } %>
             </div>
         </div>
 

@@ -42,9 +42,12 @@
                 </tbody>
             </table>
 
+            <!-- 로그인이 된 사용자만 글을 쓸 수 있다 -->
+            <% if(isAuthenticated){ %>
             <div class="btn__warp">
                 <a class="btn__write" href="/posts/new">글쓰기</a>
             </div>
+            <% } %>
         </div>
 
         <!-- footer -->

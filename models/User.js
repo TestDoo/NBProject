@@ -81,7 +81,6 @@ var passwordRegexErrorMessage = "알파벳과 숫자 조합으로 최소 8자여
 // 비밀번호 확인
 userSchema.path("password").validate(function (v) {
     var user = this; // 여기서 this 유저 모델이다
-    console.log("작동됩니까", user);
 
     // user.isNew는 해당 모델이 생성되는 경우에 true, 아니면 false값을 가진다
     // 회원가입시 새 모델 생성이므로 아직 서버에 없다 -> 그래서 true -> 아래 if문 진행

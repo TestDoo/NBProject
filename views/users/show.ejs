@@ -13,27 +13,31 @@
             <h3>반갑습니다. <%= user.username %>님!</h3>
 
             <form class="user-form" action="/users" method="post">
-              <fieldset disabled>
-                <div class="form__group">
-                  <label for="name">이름</label>
-                  <div class="col-sm-9">
-                    <input class="form__control" type="text" id="name" name="name" value="<%= user.name %>">
-                  </div>
-                </div>
-                <div class="form__group">
-                  <label for="email">이메일</label>
-                  <div class="col-sm-9">
-                    <input class="form__control" type="text" id="email" name="email" value="<%= user.email %>">
-                  </div>
-                </div>
-              </fieldset>
+                <fieldset disabled>
+                    <div class="form__group">
+                        <label for="name">이름</label>
+                        <div class="col-sm-9">
+                            <input class="form__control" type="text" id="name" name="name" value="<%= user.name %>" />
+                        </div>
+                    </div>
+                    <div class="form__group">
+                        <label for="email">이메일</label>
+                        <div class="col-sm-9">
+                            <input class="form__control" type="text" id="email" name="email" value="<%= user.email %>" />
+                        </div>
+                    </div>
+                </fieldset>
             </form>
-      
+
+            <% if(isAuthenticated && currentUser.id == user.id){ %>
             <div>
-              <a class="btn__back" href="/users/<%= user.username %>/edit"><span>회원정보수정</span></a>
-              <form action="/users/<%= user.username %>?_method=delete" method="post" class="d-inline">
-                <a class="btn__back" href="javascript:void(0)" onclick="confirm('정말 탈퇴하시겠습니까??')?this.parentElement.submit():null;"><span>회원탈퇴하기</span></a>
-              </form>
+                <a class="btn__back" href="/users/<%= user.username %>/edit"><span>회원정보수정</span></a>
+
+                <form action="/users/<%= user.username %>?_method=delete" method="post" class="d-inline">
+                    <a class="btn__back" href="javascript:void(0)" onclick="confirm('정말 탈퇴하시겠습니까??')?this.parentElement.submit():null;"><span>회원탈퇴하기</span></a>
+                </form>
+            </div>
+            <% } %>
         </div>
 
         <!-- footer -->

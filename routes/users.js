@@ -5,16 +5,6 @@ var router = express.Router();
 var User = require("../models/User");
 var util = require("../util");
 
-// index
-router.get("/", function (req, res) {
-    User.find({})
-        .sort({ username: 1 })
-        .exec(function (err, users) {
-            if (err) return res.json(err);
-            res.render("users/index", { users: users });
-        });
-});
-
 // 회원가입 페이지 렌더링 - New
 router.get("/new", function (req, res) {
     var user = req.flash("user")[0] || {};
@@ -35,7 +25,7 @@ router.post("/", function (req, res) {
 });
 
 // 회원 상세 보기 - show
-router.get("/:username", function (req, res) {
+router.get("/:username", util.isLoggedin, checkPermission, function (req, res) {
     User.findOne({ username: req.params.username }, function (err, user) {
         if (err) return res.json(err);
         res.render("users/show", { user: user });
@@ -43,7 +33,7 @@ router.get("/:username", function (req, res) {
 });
 
 // 회원 수정 페이지 보여주는 라우터 - edit
-router.get("/:username/edit", function (req, res) {
+router.get("/:username/edit", util.isLoggedin, checkPermission, function (req, res) {
     var user = req.flash("user")[0];
     var errors = req.flash("errors")[0] || {};
     if (!user) {
@@ -56,8 +46,8 @@ router.get("/:username/edit", function (req, res) {
     }
 });
 
-// 회원 정보 수정하는
-router.put("/:username", function (req, res, next) {
+// 회원 정보 수정하는 update
+router.put("/:username", util.isLoggedin, checkPermission, function (req, res, next) {
     User.findOne({ username: req.params.username })
         .select("password") // DB에서 패스워드를 읽어오게 설정
         .exec(function (err, user) {
@@ -94,5 +84,15 @@ router.delete("/:username", function (req, res) {
         res.redirect("/users");
     });
 });
+
+// 각 라우트의 해당 user의 id와 로그인된 user.id 비교해서 같은 경우에는 계속 진행 만약 다르다면 util.noPermission()를 호출하여 로그인 화면으로 보내버린다.
+function checkPermission(req, res, next) {
+    User.findOne({ username: req.params.username }, function (err, user) {
+        if (err) return res.json(err);
+        if (user.id != req.user.id) return util.noPermission(req, res);
+
+        next();
+    });
+}
 
 module.exports = router;
