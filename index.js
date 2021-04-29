@@ -49,7 +49,7 @@ app.use(function (req, res, next) {
 });
 
 // Routes
-// app.use -> 서버에 요청이 올 때마다 무조건 콜백함수 실행
+// app.use -> 서버에 요청이 올 때마다 무조건 콜백함수 실행 -> 각 라우트 파일로 가서 처리된다
 app.use("/", require("./routes/home"));
 app.use("/posts", require("./routes/posts"));
 app.use("/users", require("./routes/users"));

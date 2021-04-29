@@ -10,8 +10,6 @@
             </div>
             <div class="right-area">
                 <ul class="top-header__top-menu top-menu clearfix">
-                    <li class="top-menu__item"><a href="/users">회원목록(작업용) </a></li>
-
                     <% if(isAuthenticated){ %>
                     <li class="top-menu__item"><a href="/users/<%= currentUser.username %>">내 계정</a></li>
                     <li class="top-menu__item"><a href="/logout">로그아웃</a></li>

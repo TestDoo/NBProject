@@ -48,6 +48,53 @@
                 <a class="btn__write" href="/posts/new">글쓰기</a>
             </div>
             <% } %>
+
+            <!-- 페이지네이션 -->
+            <nav class="pagenation">
+                <%
+                    var offset = 2; // 현재 페이지 좌우로 몇개의 페이지들을 보여줄지 정하는 변수
+                    var previousBtnEnabled = currentPage > 1; // 이전 페이지 버튼은 현재 페이지가 1보다 큰 경우 활성화
+                    var nextBtnEnabled = currentPage < maxPage; // 다음 페이지 버튼은 현재 페이지가 마지막페이지보다 작은 경우 활성화
+                %>
+    
+                <ul>
+                    <li class="<%= previousBtnEnabled ? '' : 'disabled' %>">
+                        <a href="/posts?page=<%= currentPage - 1 %>&limit=<%= limit %>" tabindex="<%= previousBtnEnabled ? '' : '-1' %>">«</a>
+                    </li>
+    
+                    <% for(i = 1; i <= maxPage; i++) { %> 
+                        <!-- 만약, 페이지 번호 버튼이 1페이지 or 마지막 페이지인 경우 or 현재 페이지와 offset 이내의 차이가 있는 경우 페이지 버튼을 만든다 -->
+                        <% if(i == 1 || i == maxPage || ( i >= currentPage-offset && i <= currentPage + offset)){ %>
+                            <li class="<%= currentPage == i ? 'active' : '' %>">
+                                <a href="/posts?page=<%= i %>&limit=<%= limit %>"> <%= i %> </a>
+                            </li>
+                        <% } else if(i == 2 || i == maxPage - 1){ %>
+                            <!-- 페이지번호 2와 마지막 바로 이전 페이지번호 버튼이 맞지 않는다면 -->
+                            <li>
+                                <a>...</a>
+                            </li>
+                        <% } %>
+                    <% } %>
+    
+                    <li class="<%= nextBtnEnabled ? '' : 'disabled' %>">
+                        <a href="/posts?page=<%= currentPage+1 %>&limit=<%= limit %>" tabindex="<%= nextBtnEnabled ? '' : '-1' %>">»</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <form action="/posts" method="get"> 
+                <div >
+                    <div>
+                        <label>Show</label>
+                        <!-- onchange 값이 변할 때마다 자동으로 form에 submit함 -->
+                        <select name="limit" onchange="this.parentElement.parentElement.parentElement.submit()">
+                            <option value="5" <%= limit == 5 ? 'selected' : '' %>>5 posts</option>
+                            <option value="10" <%= limit == 10 ? 'selected' : '' %>>10 posts</option>
+                            <option value="20" <%= limit == 20 ? 'selected' : '' %>>20 posts</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
         </div>
 
         <!-- footer -->
