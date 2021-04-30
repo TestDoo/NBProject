@@ -615,3 +615,33 @@ body {
 .div__center input {
     margin-bottom: 20px;
 }
+
+/* 페이지 네이션 임시 css */
+.pagenation {
+    position: relative;
+}
+.pagenation ul {
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.pagenation ul li {
+    float: left;
+    margin: 0 10px;
+}
+.pagenation .active {
+    font-weight: bold;
+}
+
+.rel_select {
+    position: relative;
+}
+.move_select {
+    position: absolute;
+    top: 50px;
+    right: 0;
+}
+.move_select select {
+    border: 1px solid #262626;
+}

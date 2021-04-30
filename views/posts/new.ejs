@@ -9,7 +9,7 @@
         <%- include('../partials/nav') %>
 
         <div class="div__center">
-            <form action="/posts" method="post">
+            <form action="/posts<%= getPostQueryString() %>" method="post">
                 <div class="form__group">
                     <label for="title">제목</label>
                     <input type="text" id="title" name="title" value="<%= post.title %>" class="form__control <%= (errors.title)?'is-invalid':'' %>" />
@@ -30,7 +30,7 @@
                 <% } %>
 
                 <div>
-                    <a class="btn__back" href="/posts"><span>Back</span> </a>
+                    <a class="btn__back" href="/posts<%= getPostQueryString() %>"><span>Back</span> </a>
                     <button type="submit" class="btn__submit"><span>Submit</span></button>
                 </div>
             </form>

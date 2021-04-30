@@ -5,6 +5,7 @@ var methodOverride = require("method-override");
 var flash = require("connect-flash");
 var session = require("express-session");
 var passport = require("./config/passport");
+var util = require('./util');
 var app = express();
 
 // 몽고 디비 기본셋팅
@@ -51,7 +52,7 @@ app.use(function (req, res, next) {
 // Routes
 // app.use -> 서버에 요청이 올 때마다 무조건 콜백함수 실행 -> 각 라우트 파일로 가서 처리된다
 app.use("/", require("./routes/home"));
-app.use("/posts", require("./routes/posts"));
+app.use("/posts", util.getPostQueryString ,require("./routes/posts"));
 app.use("/users", require("./routes/users"));
 
 // Port Setting

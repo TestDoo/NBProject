@@ -31,12 +31,12 @@
 
             <!-- 뒤로가기, 수정, 삭제 버튼 -->
             <div>
-                <a href="/posts">Back</a>
+                <a href="/posts<%= getPostQueryString() %>">Back</a>
 
                 <!-- 조건 : 로그인된 상태 + 게시물의 작성자 id와 현재 로그인된 사용자 id 일치 => 수정과 삭제버튼 활성화 -->
                 <% if(isAuthenticated && post.write && currentUser.id == post.write.id){ %>
-                <a href="/posts/<%= post._id %>/edit">Edit</a>
-                <form action="/posts/<%= post._id %>?_method=delete" method="post">
+                <a href="/posts/<%= post._id %>/edit<%= getPostQueryString() %>">Edit</a>
+                <form action="/posts/<%= post._id %>?_method=delete<%= getPostQueryString(true) %>" method="post">
                     <!-- 
                         javascript:void(0) -> 클릭시 a링크 동작 못하게 하고 onclick 이벤트 발생 
                         onclick 이벤트 -> 정말 삭제? yes or no에 따라 동작
