@@ -32,8 +32,8 @@
                     <% posts.forEach(function(post) { %>
                     <tr class="post">
                         <td class="tab" scope="col">자유</td>
-                        <td class="title"><a href="/posts/<%= post._id %><%= getPostQueryString() %>" class="title-detail"><%= post.title %></a></td>
-                        <td class="write"><span><%= post.write ? post.write.username : "" %></span></td>
+                        <td class="title"><a href="/posts/<%= post._id %><%= getPostQueryString() %>" class="title-detail" data-search-highlight="title"><%= post.title %></a></td>
+                        <td class="write" data-search-highlight="write"><span><%= post.write ? post.write.username : "" %></span></td>
                         <td class="time date"><span data-date="<%= post.createdAt %>"></span></td>
                         <td class="view">1555</td>
                         <td class="like">5</td>
@@ -84,6 +84,7 @@
 
             <form action="/posts" method="get"> 
                 <div class="rel_select">
+                    <!-- 게시글 수 폼 -->
                     <div class="move_select">
                         <label>Show</label>
                         <!-- onchange 값이 변할 때마다 자동으로 form에 submit함 -->
@@ -92,6 +93,25 @@
                             <option value="10" <%= limit == 10 ? 'selected' : '' %>>10 posts</option>
                             <option value="20" <%= limit == 20 ? 'selected' : '' %>>20 posts</option>
                         </select>
+                    </div>
+                    
+                    <!-- 검색폼 -->
+                    <div>
+                        <label>Search</label>
+                        <div>
+                            <select name="searchType">
+                                <option value="title,body" <%= searchType=='title,body'?'selected':'' %>>Title, Body</option>
+                                <option value="title" <%= searchType=='title'?'selected':'' %>>Title</option>
+                                <option value="body" <%= searchType=='body'?'selected':'' %>>Body</option>
+                                <option value="write" <%= searchType=='write'?'selected':'' %>>write</option>
+                            </select>
+                            
+                            <input minLength="3" type="text" name="searchText" value="<%= searchText %>">
+                            
+                            <div>
+                                <button type="submit">search</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </form>

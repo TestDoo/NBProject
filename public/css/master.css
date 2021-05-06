@@ -645,3 +645,8 @@ body {
 .move_select select {
     border: 1px solid #262626;
 }
+
+/* 하이라이트 */
+.highlighted {
+    background-color: yellow;
+}
