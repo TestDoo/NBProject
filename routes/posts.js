@@ -4,6 +4,7 @@ var express = require("express");
 var router = express.Router();
 var Post = require("../models/Post");
 var User = require("../models/User"); // 포스트 찾기에서 작성자 기준으로 찾을 때 필요한 정보
+var Comment = require("../models/Comment");
 var util = require("../util");
 
 // 게시판 - Index
@@ -72,11 +73,21 @@ router.post("/", util.isLoggedin, function (req, res) {
 
 // 글 상세보기 - show
 router.get("/:id", function (req, res) {
-    Post.findOne({ _id: req.params.id })
-        .populate("write")
-        .exec(function (err, post) {
-            if (err) return res.json(err);
-            res.render("posts/show", { post: post });
+    var commentForm = req.flash("commentForm")[0] || { _id: null, form: {} };
+    var commentError = req.flash("commentError")[0] || { _id: null, parentComment: null, errors: {} };
+
+    // DB에서 두개 이상의 데이터를 가져와야 하기 때문에 Promise.all함수를 사용한다.
+    Promise.all([
+        // 게시글 하나와 거기에 달려있는 댓글 전부를 찾아서 render한다.
+        Post.findOne({ _id: req.params.id }).populate({ path: "author", select: "username" }),
+        Comment.find({ post: req.params.id }).sort("createdAt").populate({ path: "author", select: "username" }),
+    ])
+        .then(([post, comments]) => {
+            res.render("posts/show", { post: post, comments: comments, commentForm: commentForm, commentError: commentError });
+        })
+        .catch((err) => {
+            console.log("err: ", err);
+            return res.json(err);
         });
 });
 
@@ -139,6 +150,7 @@ async function createSearchQuery(queries) {
         if (searchTypes.indexOf("body") >= 0) {
             postQueries.push({ body: { $regex: new RegExp(queries.searchText, "i") } });
         }
+        app.use("/comments", util.getPostQueryString, require("./routes/comments")); // 1
         if (postQueries.length > 0) searchQuery = { $or: postQueries };
 
         // 작성자 찾기

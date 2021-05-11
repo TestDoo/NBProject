@@ -47,6 +47,46 @@
                 </form>
                 <% } %>
             </div>
+
+            <h4>Comments</h4>
+
+            <% if(comments.length){ %> 
+                <div>
+                <% comments.forEach(function(comment) { %>
+                    <div>
+                    <div>
+                        <div><%= comment.author.username %></div>
+                        <div>
+                            <div>
+                                <div><%= comment.text %></div>
+                                <small>
+                                (Created: <span data-date-time="<%= comment.createdAt %>"></span>)
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                <% }) %>
+                </div>
+            <% } %>
+
+            <div> 
+                <form action="/comments?postId=<%= post._id %><%= getPostQueryString(true) %>" method="post">
+                <fieldset <%= !isAuthenticated?'disabled':'' %>>
+                    <div>
+                    <div >
+                        <textarea name="text" rows="2" class="form__control <%= (commentError.errors.text)?'is-invalid':'' %>"><%= commentForm.form.text %></textarea>
+                    </div>
+                    <div>
+                        <button type="submit">Add Comment</button>
+                    </div>
+                    </div>
+                    <% if(commentError.errors.text){ %>
+                    <span class="invalid-feedback"><%= commentError.errors.text.message %></span>
+                    <% } %>
+                </fieldset>
+                </form>
+            </div>
         </div>
 
         <!-- footer -->
