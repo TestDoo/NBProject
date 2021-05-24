@@ -18,11 +18,17 @@
                     </div>
                     <div>
                         <div>
-                            <div class=""><span>글쓴이</span> : <span data-search-highlight="write"><%= post.write ? post.write.username : "" %></span></div>
-                            <div><span>작성날짜</span> : <span data-date-time="<%= post.createdAt %>"></span></div>
+                            <div>
+                                <span>글쓴이</span> : <span data-search-highlight="write"><%= post.write ? post.write.username : "" %></span>
+                            </div>
+                            <div>
+                                <span>작성날짜</span> : <span data-date-time="<%= post.createdAt %>"></span>
+                            </div>
                             <!-- 만약 수정이 되면 -->
                             <% if(post.updatedAt) { %>
-                            <div><span>수정날짜</span> : <span data-date-time="<%= post.updatedAt %>"></span></div>
+                            <div>
+                                <span>수정날짜</span> : <span data-date-time="<%= post.updatedAt %>"></span>
+                            </div>
                             <% } %>
                         </div>
                     </div>

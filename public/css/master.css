@@ -572,6 +572,7 @@ body {
     border: 1px solid #bbbbbb;
     padding: 9px 10px;
     margin-top: 20px;
+    z-index: 100;
 }
 
 /* 글쓰기 임시설정 */

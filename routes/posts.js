@@ -79,8 +79,8 @@ router.get("/:id", function (req, res) {
     // DB에서 두개 이상의 데이터를 가져와야 하기 때문에 Promise.all함수를 사용한다.
     Promise.all([
         // 게시글 하나와 거기에 달려있는 댓글 전부를 찾아서 render한다.
-        Post.findOne({ _id: req.params.id }).populate({ path: "author", select: "username" }),
-        Comment.find({ post: req.params.id }).sort("createdAt").populate({ path: "author", select: "username" }),
+        Post.findOne({ _id: req.params.id }).populate({ path: "write", select: "username" }),
+        Comment.find({ post: req.params.id }).sort("createdAt").populate({ path: "write", select: "username" }),
     ])
         .then(([post, comments]) => {
             res.render("posts/show", { post: post, comments: comments, commentForm: commentForm, commentError: commentError });
