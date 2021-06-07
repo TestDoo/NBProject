@@ -80,7 +80,7 @@ router.get("/:id", function (req, res) {
     Promise.all([
         // 게시글 하나와 거기에 달려있는 댓글 전부를 찾아서 render한다.
         Post.findOne({ _id: req.params.id }).populate({ path: "write", select: "username" }),
-        Comment.find({ post: req.params.id }).sort("createdAt").populate({ path: "write", select: "username" }),
+        Comment.find({ post: req.params.id }).sort("createdAt").populate({ path: "author", select: "username" }),
     ])
         .then(([post, comments]) => {
             res.render("posts/show", { post: post, comments: comments, commentForm: commentForm, commentError: commentError });
