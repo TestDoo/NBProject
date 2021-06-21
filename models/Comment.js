@@ -27,4 +27,5 @@ commentSchema
     });
 
 var Comment = mongoose.model("comment", commentSchema);
+
 module.exports = Comment;

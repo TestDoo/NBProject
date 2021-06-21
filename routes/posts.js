@@ -83,10 +83,10 @@ router.get("/:id", function (req, res) {
         Comment.find({ post: req.params.id }).sort("createdAt").populate({ path: "author", select: "username" }),
     ])
         .then(([post, comments]) => {
-            res.render("posts/show", { post: post, comments: comments, commentForm: commentForm, commentError: commentError });
+            var commentTrees = util.convertToTrees(comments, "_id", "parentComment", "childComments");
+            res.render("posts/show", { post: post, commentTrees: commentTrees, commentForm: commentForm, commentError: commentError });
         })
         .catch((err) => {
-            console.log("err: ", err);
             return res.json(err);
         });
 });
