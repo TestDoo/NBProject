@@ -14,7 +14,7 @@
             <table id="board">
                 <thead>
                     <tr>
-                        <th class="post__tab" scope="col">분류</th>
+                        <th class="post__tab" scope="col">번호</th>
                         <th class="post__title" scope="col">제목</th>
                         <th class="post__write write" scope="col">글쓴이</th>
                         <th class="post__date" scope="col">날짜</th>
@@ -31,7 +31,7 @@
                     <!-- 게시판에 데이터가 있다면 -->
                     <% posts.forEach(function(post) { %>
                     <tr class="post">
-                        <td class="tab" scope="col">자유</td>
+                        <td class="tab" scope="col"><%= post.numId %></td>
                         
                         <td class="title">
                             <a href="/posts/<%= post._id %><%= getPostQueryString() %>" class="title-container clearfix">
@@ -46,7 +46,7 @@
                         
                         <td class="write" data-search-highlight="write"><span><%= post.write ? post.write.username : "" %></span></td>
                         <td class="time date"><span data-date="<%= post.createdAt %>"></span></td>
-                        <td class="view">1555</td>
+                        <td class="view"><%= post.views %></td>
                         <td class="like">5</td>
                     </tr>
                     <% }) %>

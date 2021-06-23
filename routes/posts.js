@@ -65,9 +65,11 @@ router.get("/", async function (req, res) {
                 // 9 : 데이터를 원하는 형태로 가공하기 위해 사용함 - title: 1의 의미는 title항목을 보여줄 것이라는 뜻
                 $project: {
                     title: 1,
-                    author: {
+                    write: {
                         username: 1,
                     },
+                    views: 1,
+                    numId: 1,
                     createdAt: 1,
                     // 10 : commtents의 길이를 가져온다
                     commentCount: { $size: "$comments" },
@@ -119,6 +121,8 @@ router.get("/:id", function (req, res) {
         Comment.find({ post: req.params.id }).sort("createdAt").populate({ path: "author", select: "username" }),
     ])
         .then(([post, comments]) => {
+            post.views++;
+            post.save();
             var commentTrees = util.convertToTrees(comments, "_id", "parentComment", "childComments");
             res.render("posts/show", { post: post, commentTrees: commentTrees, commentForm: commentForm, commentError: commentError });
         })

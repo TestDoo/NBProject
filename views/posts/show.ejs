@@ -11,7 +11,7 @@
         <div class="div__center">
             <!-- 글 상세 보기 -->
             <div>
-                <h5 data-search-highlight="title">글제목 : <%= post.title %></h5>
+                <h5 data-search-highlight="title"><%= post.numId %>. 글제목 : <%= post.title %></h5>
                 <div>
                     <div>
                         <div data-search-highlight="body">글내용 : <%= post.body%></div>
@@ -19,6 +19,7 @@
                     <div>
                         <div>
                             <div><span>글쓴이</span> : <span data-search-highlight="write"><%= post.write ? post.write.username : "" %></span></div>
+                            <div><span>조회수</span> : <span><%= post.views %></span></div>
                             <div><span>작성날짜</span> : <span data-date-time="<%= post.createdAt %>"></span></div>
                             <!-- 만약 수정이 되면 -->
                             <% if(post.updatedAt) { %>
