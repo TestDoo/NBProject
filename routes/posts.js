@@ -31,13 +31,49 @@ router.get("/", async function (req, res) {
         var count = await Post.countDocuments(searchQuery);
         maxPage = Math.ceil(count / limit);
 
-        // 검색된 posts를 posts 변수에 담는다.
-        posts = await Post.find(searchQuery)
-            .populate("write")
-            .sort("-createdAt") // 정렬 방식
-            .skip(skip) // skip함수는 일정한 수만큼 검색된 결과를 무시하는 함수
-            .limit(limit) // limit함수는 일정한 수만큼만 검색된 결과를 보여주는 함수
-            .exec();
+        // 1 : 모델에 대한 aggregation을 mongodb로 전달한다.
+        posts = await Post.aggregate([
+            // 2 : 모델.find 함수와 동일한 역할을 함 - 더 복잡한 일을 할 때는 이렇게 한다.
+            { $match: searchQuery },
+            {
+                // 3 : SQL의 join과 같이 현재 collection에 다른 collection을 이어주는 역할을 함
+                $lookup: {
+                    from: "users", // 연결할 다른 collection - user
+                    localField: "write", // 현재 collection의 항목 - post
+                    foreignField: "_id", // 다른 collection의 항목 - user
+                    as: "write", // 다른 collection을 담을 항목의 이름 - post.author에 배열로 생성됨(기존 post.author의 값은 지워짐)
+                },
+            },
+            // 4 : 배열을 flat하게 풀어주는 역할
+            { $unwind: "$write" },
+            // 5 : 모델.sort와 같은 역할 - 정렬 방식을 정한다 대신 형태를 약간 바꿔야 함
+            { $sort: { createdAt: -1 } },
+            // 6 : 모델.skip과 같은 역할 - 일정한 수만큼 검색된 결과를 무시하는 함수
+            { $skip: skip },
+            // 7 : 모델.limit와 같은 역할 - 일정한 수만큼만 검색된 결과를 보여주는 함수
+            { $limit: limit },
+            {
+                // 8 : 위와 같다 이번에는 comments.post 항목과 연결한다.
+                $lookup: {
+                    from: "comments",
+                    localField: "_id",
+                    foreignField: "post",
+                    as: "comments",
+                },
+            },
+            {
+                // 9 : 데이터를 원하는 형태로 가공하기 위해 사용함 - title: 1의 의미는 title항목을 보여줄 것이라는 뜻
+                $project: {
+                    title: 1,
+                    author: {
+                        username: 1,
+                    },
+                    createdAt: 1,
+                    // 10 : commtents의 길이를 가져온다
+                    commentCount: { $size: "$comments" },
+                },
+            },
+        ]).exec();
     }
 
     // 최종적으로 view에 뿌려주는 부분. => index.ejs

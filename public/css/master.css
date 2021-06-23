@@ -674,3 +674,8 @@ body {
 .commentContentED {
     color: crimson;
 }
+
+/* 포스트 댓글 수 나타내기 임시 css */
+.title-ellipsis {
+    float: left;
+}
